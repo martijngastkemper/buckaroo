@@ -42,10 +42,10 @@ class Request
 
     public function loadPem($filename)
     {
-        if (!file_exists($pemfilename)) {
+        if (!file_exists($filename)) {
             throw new \InvalidArgumentException('PEM file does not exist');
         }
-        $fp = fopen($pemfilename, "r");
+        $fp = fopen($filename, "r");
         $this->setPemData(fread($fp, 8192));
         fclose($fp);
     }
@@ -56,7 +56,7 @@ class Request
 
     public function setChannel($channel)
     {
-	$this->channel = $channel;
+	    $this->channel = $channel;
     }
 
     public function sendRequest($TransactionRequest, $type)
