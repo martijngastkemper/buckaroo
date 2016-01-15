@@ -32,14 +32,9 @@ class SoapClientWSSEC extends \SoapClient
 		return parent::__doRequest($domDOC->saveXML($domDOC->documentElement), $location, $action, $version, $one_way);
 	}
 
-	public function loadPem($pemfilename) {
-		if (!file_exists($pemfilename)) {
-			throw new \InvalidArgumentException('PEM file does not exist');
-		}
-		$fp = fopen($pemfilename, "r");
-		$this->pemdata = fread($fp, 8192);
-		fclose($fp);
-	}
+    public function setPemData($pemData) {
+        $this->pemdata = $pemData;
+    }
 
 	private function SignDomDocument($domDocument) {	
 

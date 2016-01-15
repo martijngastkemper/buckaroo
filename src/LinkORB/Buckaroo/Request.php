@@ -42,7 +42,16 @@ class Request
 
     public function loadPem($filename)
     {
-        $this->soapClient->loadPem($filename);
+        if (!file_exists($pemfilename)) {
+            throw new \InvalidArgumentException('PEM file does not exist');
+        }
+        $fp = fopen($pemfilename, "r");
+        $this->setPemData(fread($fp, 8192));
+        fclose($fp);
+    }
+
+    public function setPemData($pemData) {
+        $this->soapClient->setPemData($pemData);
     }
 
     public function setChannel($channel)
