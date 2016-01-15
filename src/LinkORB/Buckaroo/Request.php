@@ -104,6 +104,9 @@ class Request
 
         $return = [];
 		switch($type) {
+            case 'cancel-transaction':
+                $this->soapClient->CancelTransaction($TransactionRequest);
+                break;
 			case 'invoiceinfo':
                 $return['result'] = $this->soapClient->InvoiceInfo($TransactionRequest);
 				break;
