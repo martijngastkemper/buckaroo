@@ -4,6 +4,9 @@ namespace LinkORB\Buckaroo;
 
 class SoapClientWSSEC extends \SoapClient
 {
+    /**
+     * @var string
+     */
 	private $pemdata = null;
 
 	public function __call($name, $args)
@@ -32,8 +35,13 @@ class SoapClientWSSEC extends \SoapClient
 		return parent::__doRequest($domDOC->saveXML($domDOC->documentElement), $location, $action, $version, $one_way);
 	}
 
+    /**
+     * @param string $pemData
+     * @return SoapClientWSSEC
+     */
     public function setPemData($pemData) {
         $this->pemdata = $pemData;
+        return $this;
     }
 
 	private function SignDomDocument($domDocument) {	

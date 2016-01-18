@@ -40,6 +40,9 @@ class Request
 		$this->soapClient = new SoapClientWSSEC($wsdl_url, array_merge(static::$defaultSoapOptions, $soapOptions));
 	}
 
+    /**
+     * @param string $filename
+     */
     public function loadPem($filename)
     {
         if (!file_exists($filename)) {
@@ -50,8 +53,13 @@ class Request
         fclose($fp);
     }
 
+    /**
+     * @param $pemData
+     * @return $this
+     */
     public function setPemData($pemData) {
         $this->soapClient->setPemData($pemData);
+        return $this;
     }
 
     public function setChannel($channel)
